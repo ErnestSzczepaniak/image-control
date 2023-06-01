@@ -41,7 +41,7 @@ def create_group(name: str, items: List[str]):
             group.append(f'|{" " * WIDTH}{line}')
     return group
 
-def create_map(layout: List[str], size_firmware: int, size_padding: int, header_layout: dict):
+def create(layout: List[str], size_firmware: int, size_padding: int, header_layout: dict):
 
     offset_global = 0
     offset_local = 0
@@ -71,6 +71,4 @@ def create_map(layout: List[str], size_firmware: int, size_padding: int, header_
 
     result.append('+' + '-' * WIDTH + '+' + '-' * WIDTH + '+')
 
-    with open('map.txt', 'w') as output:
-        for line in result:
-            output.write(line + '\n')
+    return '\n'.join(result)

@@ -1,11 +1,11 @@
-import pathlib, arguments, visualize
+import pathlib, arguments, map
 from header import Header, FIELDS as HEADER_FIELDS
 from firmware import Firmware
-
 
 ARGUMENTS = [
     arguments.INPUT,
     arguments.OUTPUT,
+    arguments.MAP,
     arguments.HEADER_MAGIC,
     arguments.HEADER_PROTECTION,
     arguments.HEADER_CRC,
@@ -51,13 +51,13 @@ def execute(**kwargs):
 
     path_input = pathlib.Path(kwargs['input']).absolute()
     path_output = pathlib.Path(kwargs['output']).absolute()
+    path_map = pathlib.Path(kwargs['map']).absolute()
 
     firmware = Firmware()
     header = Header()
 
-    with open(path_input, 'rb') as input:
-
-        firmware.data = bytearray(input.read())
+    with open(path_input, 'rb') as file:
+        firmware.data = bytearray(file.read())
 
     # /* ---------------------------------------------| process firmware |--------------------------------------------- */
 
@@ -142,7 +142,8 @@ def execute(**kwargs):
         elif element == 'padding':
             image.extend(padding)
 
-    with open(path_output, 'wb') as output:
-        output.write(image)
+    with open(path_output, 'wb') as file:
+        file.write(image)
 
-    visualize.create_map(kwargs['image_layout'], firmware.size(), padding_size, HEADER_FIELDS)
+    with open(path_map, 'w') as file:
+        file.write(map.create(kwargs['image_layout'], firmware.size(), padding_size, HEADER_FIELDS))

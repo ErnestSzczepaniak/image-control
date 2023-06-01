@@ -31,6 +31,7 @@ def default_id() -> str:
 
 INPUT =                             ['--input',                             {'required': True,      'type': str,            'default': '',                                      'help': 'Input file'}]
 OUTPUT =                            ['--output',                            {'required': True,      'type': str,            'default': '',                                      'help': 'Output file'}]
+MAP =                               ['--map',                               {'required': False,     'type': str,            'default': 'map.txt',                               'help': 'Map file'}]
 
 # /* ---------------------------------------------| header |--------------------------------------------- */
 
@@ -86,3 +87,6 @@ FIRMWARE_RANDOM =                   ['--firmware-random',                   {'re
 
 IMAGE_SIZE =                        ['--image-size',                        {'required': True,     'type': convert_size,    'default': '',                                    'help': 'Image size'}]
 IMAGE_LAYOUT =                      ['--image-layout',                      {'required': False,     'type': str,            'default': ['firmware', 'padding', 'header'],        'help': 'Image layout', 'nargs': '+'}]
+
+# /* ---------------------------------------------| map |--------------------------------------------- */
+
